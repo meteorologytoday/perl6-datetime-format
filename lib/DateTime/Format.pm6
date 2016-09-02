@@ -108,7 +108,15 @@ multi sub strftime (
 ## as strftime().
 ## TODO: implement me.
 sub strptime ($string, $format, :$lang=$datetime-format-lang) is export {
- !!!
+ # 1. Setup regex parser
+ #   - Extract "%"-started token and break $str into pieces. (e.g. %Y-%m-%d %H:%i:%s => ["-", "-", " ", ":", ":"])
+ #   - Throw error if token is not valid.
+ #   - Create regex with given pattern => /(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})/
+ #   - Remember to elimiate contradictory information. For example, %Y and %y cannot appear at the same time.
+ # 2. Regex the string and extract time information
+ # 3. Create time object and return it
+ 
+	while $str ~~ //
 }
 
 ## Returns the language-specific day name.
